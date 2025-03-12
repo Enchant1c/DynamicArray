@@ -16,7 +16,7 @@ class Program
         PrintArray(array, "После добавления элементов: ");
 
         Console.WriteLine($"Проверка: {array.Any()}");
-
+        Console.WriteLine("22");
         Console.WriteLine($"Первый элемент: {array.First()}");
         
         array.Insert(7, 2);
