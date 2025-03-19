@@ -35,6 +35,7 @@ class Program
         
         array.Clear();
         PrintArray(array, "После очистки коллекции: ");
+        Console.ReadKey();
     }
     /// <summary>
     /// Вывод массива
@@ -46,4 +47,5 @@ class Program
         {
             Console.WriteLine($"{message}[{string.Join(", ", array.ToArray())}]");
         }
+
 }
