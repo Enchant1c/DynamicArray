@@ -16,7 +16,7 @@ class Program
         PrintArray(array, "После добавления элементов: ");
 
         Console.WriteLine($"Проверка: {array.Any()}");
-        Console.WriteLine("22");
+
         Console.WriteLine($"Первый элемент: {array.First()}");
         
         array.Insert(7, 2);
@@ -26,11 +26,11 @@ class Program
 
         Console.WriteLine($"Индекс последнего вхождения: {array.LastIndexOf(9)}");
         
-        bool removed = array.Remove(9);
+        var removed = array.Remove(9);
         PrintArray(array, "После удаления: ");
         Console.WriteLine($"Элемент удален?: {removed}");
         
-        int removedCount = array.RemoveAll(new int[] { 1, 3 });
+        var removedCount = array.RemoveAll(new int[] { 1, 3 });
         PrintArray(array, $"Удалено {removedCount} элементов, После удаления:");
         
         array.Clear();

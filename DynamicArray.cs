@@ -2,36 +2,45 @@
 
 public class DynamicArray<T>
 {
-    private T[] elements;
-    private int count;
-    private int capacity; 
+    /// <summary>
+    /// Элементы коллекции
+    /// </summary>
+    private T[] _elements;
+    /// <summary>
+    /// Текущее кол-во элементов в коллекции
+    /// </summary>
+    private int _count;
+    /// <summary>
+    /// Емкость коллекции
+    /// </summary>
+    private int _capacity; 
     
     /// <summary>
     /// Конструктор коллекции
     /// </summary>
     public DynamicArray()
     {
-        capacity = 3;
-        elements = new T[capacity];
-        count = 0;
+        _capacity = 3;
+        _elements = new T[_capacity];
+        _count = 0;
     }
     /// <summary>
     /// Возвращает текущую емкость массива:
     /// </summary>
-    public int Capacity => capacity;
+    public int Capacity => _capacity;
     /// <summary>
     /// Возвращает текущее количество элементов:
     /// </summary>
-    public int Count => count;
+    public int Count => _count;
     /// <summary>
     /// Добавление элемента
     /// </summary>
     /// <param name="item"></param>    
     public void Add(T item)
     {
-        if (count == capacity)
-            ResizeArray(capacity + 1);
-        elements[count++] = item;
+        if (_count == _capacity)
+            ResizeArray(_capacity + 1);
+        _elements[_count++] = item;
     }
     /// <summary>
     /// Добавление нескольких элементов
@@ -43,19 +52,19 @@ public class DynamicArray<T>
         if (items == null)
             throw new ArgumentNullException(nameof(items));
 
-        int required = count + items.Length;
-        if (required > capacity)
+        int required = _count + items.Length;
+        if (required > _capacity)
         {            
             ResizeArray(required);
         }
-        Array.Copy(items, 0, elements, count, items.Length);
-        count += items.Length;
+        Array.Copy(items, 0, _elements, _count, items.Length);
+        _count += items.Length;
     }
     /// <summary>
     /// Проверка на элементы в коллекции
     /// </summary>
     /// <returns></returns>
-    public bool Any() => count > 0;
+    public bool Any() => _count > 0;
     /// <summary>
     /// Возвращает первый элемент
     /// </summary>
@@ -63,9 +72,9 @@ public class DynamicArray<T>
     /// <exception cref="InvalidOperationException"></exception>
     public T First()
     {
-        if (count == 0)
+        if (_count == 0)
             throw new InvalidOperationException("Коллекция пуста");
-        return elements[0];
+        return _elements[0];
     }
     /// <summary>
     /// Удаляет первый найденый элемент
@@ -91,31 +100,31 @@ public class DynamicArray<T>
         if (items == null)
             throw new ArgumentNullException(nameof(items));
 
-        int originalCount = count;
+        int originalCount = _count;
         int newCount = 0;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < _count; i++)
         {
             bool found = false;
             foreach (var item in items)
             {
-                if (elements[i].Equals(item))
+                if (_elements[i].Equals(item))
                 {
                     found = true;
                     break;
                 }
             }
             if (!found)
-                elements[newCount++] = elements[i];
+                _elements[newCount++] = _elements[i];
         }
 
-        count = newCount;
+        _count = newCount;
         return originalCount - newCount;
     }
     /// <summary>
     /// Очищает коллекцию
     /// </summary>
-    public void Clear() => count = 0;
+    public void Clear() => _count = 0;
     /// <summary>
     /// Добавляет элемент по индексу
     /// </summary>
@@ -124,17 +133,17 @@ public class DynamicArray<T>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void Insert(T item, int index)
     {
-        if (index < 0 || index > count)
+        if (index < 0 || index > _count)
             throw new ArgumentOutOfRangeException(nameof(index));
 
-        if (count == capacity)
-            ResizeArray(capacity + 1);
+        if (_count == _capacity)
+            ResizeArray(_capacity + 1);
 
-        for (int i = count; i > index; i--)
-            elements[i] = elements[i - 1];
+        for (int i = _count; i > index; i--)
+            _elements[i] = _elements[i - 1];
 
-        elements[index] = item;
-        count++;
+        _elements[index] = item;
+        _count++;
     }
     /// <summary>
     /// Возвращает индекс первого вхождения элемента в коллекции
@@ -143,8 +152,8 @@ public class DynamicArray<T>
     /// <returns></returns>
     public int IndexOf(T item)
     {
-        for (int i = 0; i < count; i++)
-            if (elements[i].Equals(item))
+        for (int i = 0; i < _count; i++)
+            if (_elements[i].Equals(item))
                 return i;
         return -1;
     }
@@ -155,8 +164,8 @@ public class DynamicArray<T>
     /// <returns></returns>
     public int LastIndexOf(T item)
     {
-        for (int i = count - 1; i >= 0; i--)
-            if (elements[i].Equals(item))
+        for (int i = _count - 1; i >= 0; i--)
+            if (_elements[i].Equals(item))
                 return i;
         return -1;
     }
@@ -167,9 +176,9 @@ public class DynamicArray<T>
     private void ResizeArray(int newCapacity)
     {
         T[] newElements = new T[newCapacity];
-        Array.Copy(elements, newElements, count);
-        elements = newElements;
-        capacity = newCapacity;
+        Array.Copy(_elements, newElements, _count);
+        _elements = newElements;
+        _capacity = newCapacity;
     }
     /// <summary>
     /// Удаляет элемент по указанному индексу.
@@ -178,12 +187,12 @@ public class DynamicArray<T>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     private void RemoveAt(int index)
     {
-        if (index < 0 || index >= count)
+        if (index < 0 || index >= _count)
             throw new ArgumentOutOfRangeException(nameof(index));
 
-        for (int i = index; i < count - 1; i++)
-            elements[i] = elements[i + 1];
-        count--;
+        for (int i = index; i < _count - 1; i++)
+            _elements[i] = _elements[i + 1];
+        _count--;
     }
     /// <summary>
     /// Вывод коллекции
@@ -191,8 +200,8 @@ public class DynamicArray<T>
     /// <returns></returns>
     public T[] ToArray()
     {
-        T[] result = new T[count];
-        Array.Copy(elements, result, count);
+        T[] result = new T[_count];
+        Array.Copy(_elements, result, _count);
         return result;
     }
     

@@ -1,0 +1,7 @@
+C:\Users\Dima\source\repos\dinamicarray\bin\Debug\dinamicarray.exe.config
+C:\Users\Dima\source\repos\dinamicarray\bin\Debug\dinamicarray.exe
+C:\Users\Dima\source\repos\dinamicarray\bin\Debug\dinamicarray.pdb
+C:\Users\Dima\source\repos\dinamicarray\obj\Debug\dinamicarray.csproj.AssemblyReference.cache
+C:\Users\Dima\source\repos\dinamicarray\obj\Debug\dinamicarray.csproj.CoreCompileInputs.cache
+C:\Users\Dima\source\repos\dinamicarray\obj\Debug\dinamicarray.exe
+C:\Users\Dima\source\repos\dinamicarray\obj\Debug\dinamicarray.pdb
